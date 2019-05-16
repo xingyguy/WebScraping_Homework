@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    * {
+      font-family: "Times New Roman", Times, serif;
+    }
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+      
+    <div class="row" id="mars-news">
+        <div class="col-md-11">
+            <h2><strong>Latest Mars News</strong></h2>
+            <hr>
+            <h4 class="heading"><strong>{{mars.title}}</strong></h4>
+            <p>{{mars.article}}</p>
+        </div>
+    </div>
+      
+    <div class="row" id="mars-image mars-weather mars-data">
+        <div class="col-md-8">
+            <h2><strong>Featured Mars Image</strong></h2>
+            <hr>
+            <img class="img-responsive" src={{ mars.image_url }} alt="{{ mars.image_url }}">
+
+        </div>
+
+        <div class="col-md-3">
+            <div class ="border">
+                <h2>Current Weather on Mars</h2>
+                <hr>
+                <p>{{ mars.mars_weather }}</p>
+            </div>
+
+            <div class="border">
+                <h2>Mars Facts</h2>
+                <hr>
+                {{mars.html_table|safe}}
+            </div>
+        </div>
+    </div>
+      
+    <div class="row" id="mars-hemispheres">
+        <div class="col-md-12">
+            <h2 class="text-center"><strong>Mars Hemispheres</strong></h2>
+            <hr>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    {%for img in mars.hemisphere_image_urls %}
+                    <div class="col-sm-5">
+                        <div class="card">
+                            <img class="card-img-top img-responsive" src={{ img.img_url }} alt={{ img.img_url }}>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ img.title }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
+
